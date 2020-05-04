@@ -1,0 +1,22 @@
+{
+  "name": "telegrambot-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moh-C/TelegramBot-Node.git"
+  },
+  "author": "Aaron",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moh-C/TelegramBot-Node/issues"
+  },
+  "homepage": "https://github.com/moh-C/TelegramBot-Node#readme",
+  "dependencies": {
+    "telegraf": "^3.32.0"
+  }
+}
