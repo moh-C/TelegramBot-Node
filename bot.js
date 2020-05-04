@@ -4,7 +4,7 @@ const bot = new Telegraph('1224771643:AAHpQ1pU5YvDeKDh4_McnxxComFTQMswZ9k');
 
 // code
 bot.start((ctx) => {
-    ctx.reply('Holas!');
+    ctx.reply(`Holas ${ctx.from.first_name}!`);
 })
 
 bot.help((ctx) => {
