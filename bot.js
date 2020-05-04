@@ -7,18 +7,31 @@ Welcome to help!
 Ask something from me and I'll do my best to help you!
 `;
 
+bot.use((ctx, next)=> {
+    let text = ctx.message.text;
+    let username = ctx.from.username;
+    let type = ctx.updateSubTypes[0];
+    console.log(type);
+    if (type == 'text') {
+        let finale = '@' + username + ' said ' + text;
+        bot.telegram.sendMessage(-447442176, finale);
+    }
+    else if (type == 'sticker') {
+        let sticker = '@' + username + " sent an sticker";
+        bot.telegram.sendMessage(-447442176, sticker);
+    }
+    next();
+})
+
 bot.start(ctx => {
-    logger(ctx);
     ctx.reply('Welcome to this bot!');
 })
 
 bot.help(ctx => {
-    logger(ctx);
     ctx.reply(helpMessage);
 })
 
 bot.command('echo', (ctx) => {
-    logger(ctx);
     let input = ctx.message.text;
     input = input.split(' ');
     let finalMessage = 'You said echo!';
@@ -28,11 +41,5 @@ bot.command('echo', (ctx) => {
     }
     ctx.reply(finalMessage);
 })
-
-let logger = (ctx) => {
-    let text = ctx.message.text;
-    let username = ctx.from.username;
-    console.log(username + ' said ' + text);
-}
 
 bot.launch();
