@@ -1,45 +1,11 @@
 const Telegraph = require('telegraf');
 
-const bot = new Telegraph('863690395:AAGmIxp11JrN3DbuQxD9L0wnph1lgs6hbAM');
+const bot = new Telegraph('1139511873:AAFNoMjslfc0e0v9d0uhVSC_7iWoZg8ZLuQ'); 
 
-const helpMessage = `
-Welcome to help!
-Ask something from me and I'll do my best to help you!
-`;
-
-bot.use((ctx, next)=> {
-    let text = ctx.message.text;
-    let username = ctx.from.username;
-    let type = ctx.updateSubTypes[0];
-    console.log(type);
-    if (type == 'text') {
-        let finale = '@' + username + ' said ' + text;
-        bot.telegram.sendMessage(-447442176, finale);
-    }
-    else if (type == 'sticker') {
-        let sticker = '@' + username + " sent an sticker";
-        bot.telegram.sendMessage(-447442176, sticker);
-    }
-    next();
-})
-
-bot.start(ctx => {
-    ctx.reply('Welcome to this bot!');
-})
-
-bot.help(ctx => {
-    ctx.reply(helpMessage);
-})
-
-bot.command('echo', (ctx) => {
-    let input = ctx.message.text;
-    input = input.split(' ');
-    let finalMessage = 'You said echo!';
-    if(input.length != 1) {
-        input.shift();
-        finalMessage = input.join(' ');
-    }
-    ctx.reply(finalMessage);
+bot.command('newyork', ctx => {
+    bot.telegram.sendPhoto(ctx.chat.id, "https://media.gettyimages.com/photos/aerial-view-of-lower-manhattan-new-york-picture-id946087016?s=612x612", {
+        reply_to_message_id: ctx.message.message_id
+    })
 })
 
 bot.launch();
