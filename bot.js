@@ -21,16 +21,27 @@ bot.command(["test", "tests", "Test"],(ctx)=>{
 
 bot.hears('Cat', (ctx)=>{
     ctx.reply('Fuck you!');
-})
+});
 
 bot.on('sticker', (ctx)=>{
     ctx.reply('That was a sticker!');
-})
+});
 
 bot.on('photo', (ctx)=>{
     ctx.reply('That was a photo!');
+});
+
+bot.mention('aaro_n', ctx => {
+    ctx.reply('You mentioned that piece of shit did ya?');
 })
 
+bot.hashtag('hash', ctx =>{
+    ctx.reply('Hashtags are here!');
+})
+
+bot.phone('9102168514', (ctx)=>{
+    ctx.reply('Yeah we get it you wanna phone that fucker!')
+});
 
 
 bot.launch();
