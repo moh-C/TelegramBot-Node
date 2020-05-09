@@ -5,6 +5,27 @@ const bot = new Telegraph('1139511873:AAFNoMjslfc0e0v9d0uhVSC_7iWoZg8ZLuQ');
 const axios = require('axios');
 const fs = require('fs');
 
+
+bot.command('test', ctx => {
+    bot.telegram.sendMessage(ctx.chat.id, 'Welcome', {
+        reply_markup: {
+            inline_keyboard: [
+                [
+                    { text: 'One', callback_data: 'none' },
+                    { text: 'One', callback_data: 'none' }
+                ],
+                [
+                    { text: 'One', callback_data: 'none' }
+                ],[
+                    { text: 'One', callback_data: 'none' },
+                    { text: 'One', callback_data: 'none' },
+                    { text: 'One', callback_data: 'none' }
+                ]
+            ]
+        }
+    })
+})
+
 bot.command('fortune', ctx => {
     axios.get('http://yerkee.com/api/fortune')
         .then(res => {
