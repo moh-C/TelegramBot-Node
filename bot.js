@@ -2,53 +2,80 @@ const Telegraph = require('telegraf');
 
 const bot = new Telegraph('1139511873:AAFNoMjslfc0e0v9d0uhVSC_7iWoZg8ZLuQ'); 
 
-let stateof = '';
-
-bot.use((ctx, next) => {
-    let msg = '';
-    try {
-        let msg = ctx.message.text;
-    } catch(err) {
-        console.log(err);
+let members = {
+    captain: {
+        num: 97242000,
+        email: 'hi@hi.com',
+        current: false
+    },
+    second: {
+        num: 97242000,
+        current: false
+    },
+    third: {
+        num: 97242000,
+        current: false
+    },
+    fourth: {
+        num: 97242000,
+        current: false
+    },
+    fifth: {
+        num: 97242000,
+        current: false
     }
-    console.log(msg);
-    next();
-})
+};
+
+let statefinder = res => {
+    for(let e in members) {
+        if(e == res) {
+            members[e].current = true;
+        } else members[e].current = false;
+    }
+    console.log(members);
+}
 
 bot.command('start', ctx => {
     bot.telegram.sendMessage(ctx.chat.id, 'Welcome', {
         reply_markup: {
             inline_keyboard: [
                 [
-                    { text: 'firstOne', callback_data: 'firstOne' },
-                    { text: 'One', callback_data: 'none' }
+                    { text: 'سرگروه', callback_data: 'captain' },
                 ],
                 [
-                    { text: 'One', callback_data: 'none' }
-                ],[
-                    { text: 'One', callback_data: 'none' },
-                    { text: 'One', callback_data: 'none' },
-                    { text: 'One', callback_data: 'none' }
+                    { text: 'عضو 2', callback_data: 'second' }
+                ],
+                [
+                    { text: 'عضو 3', callback_data: 'third' }
+                ],
+                [
+                    { text: 'عضو 4', callback_data: 'fourth' }
+                ],
+                [
+                    { text: 'عضو 5', callback_data: 'fifth' }
                 ]
             ]
         }
     })
 })
 
-let commands = ['97242042', '97242043'];
+let actions = [
+    'captain',
+    'second',
+    'third',
+    'fourth',
+    'fifth'
+]
 
-bot.hears(commands, ctx => {
+bot.action(actions, ctx => {
+    ctx.answerCbQuery();
+    statefinder(ctx.match);
+    //console.log(ctx.match);
+    bot.telegram.sendMessage(ctx.chat.id,'لطفا شماره دانشجویی سرگروه را وارد کنید: ');
+})
+
+bot.on('message', ctx=> {
     console.log(ctx.message.text);
 })
-
-bot.action('firstOne', async ctx => {
-    ctx.answerCbQuery('Tnx');
-    stateof = 'firstOne';
-    bot.telegram.sendMessage(ctx.chat.id,'Enter the number: ');
-})
-
-function log(ctx) {
-    console.log(ctx);
-}
 
 bot.launch();
